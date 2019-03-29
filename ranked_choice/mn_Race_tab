@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar  7 15:53:11 2019
+
+@author: ruthbuck
+"""
+
+import pandas as pd
+
+mn = pd.read_csv('/Users/ruthbuck/Dropbox/Chicago RCV project/outcomes/minn_outcomes_with_demos.csv')
+
+race_list= []
+i=0
+for i in range(0,len(mn)):
+    precinct_name = mn.iloc[i]['Precinct']
+    election = mn.iloc[i]['Election']
+    black = 0
+    white = 0
+    asian = 0
+    hispanic = 0
+    undetermined = 0
+    if mn.iloc[i]['Winner_1_Race'] == 'black':
+        black += 1
+    elif mn.iloc[i]['Winner_1_Race'] == 'white':
+        white += 1
+    elif mn.iloc[i]['Winner_1_Race'] == 'asian':
+        asian += 1
+    elif mn.iloc[i]['Winner_1_Race'] == 'hispanic':
+        hispanic += 1 
+    else:
+        undetermined += 1
+    if mn.iloc[i]['Winner_2_Race'] == 'black':
+        black += 1
+    elif mn.iloc[i]['Winner_2_Race'] == 'white':
+        white += 1
+    elif mn.iloc[i]['Winner_2_Race'] == 'asian':
+        asian += 1
+    elif mn.iloc[i]['Winner_2_Race'] == 'hispanic':
+        hispanic += 1 
+    else:
+        undetermined += 1
+    if mn.iloc[i]['Winner_3_Race'] == 'black':
+        black += 1
+    elif mn.iloc[i]['Winner_3_Race'] == 'white':
+        white += 1
+    elif mn.iloc[i]['Winner_3_Race'] == 'asian':
+        asian += 1
+    elif mn.iloc[i]['Winner_3_Race'] == 'hispanic':
+        hispanic += 1 
+    else:
+        undetermined += 1
+    if mn.iloc[i]['Winner_4_Race'] == 'black':
+        black += 1
+    elif mn.iloc[i]['Winner_4_Race'] == 'white':
+        white += 1
+    elif mn.iloc[i]['Winner_4_Race'] == 'asian':
+        asian += 1
+    elif mn.iloc[i]['Winner_4_Race'] == 'hispanic':
+        hispanic += 1 
+    else:
+        undetermined += 1
+    if mn.iloc[i]['Winner_5_Race'] == 'black':
+        black += 1
+    elif mn.iloc[i]['Winner_5_Race'] == 'white':
+        white += 1
+    elif mn.iloc[i]['Winner_5_Race'] == 'asian':
+        asian += 1
+    elif mn.iloc[i]['Winner_5_Race'] == 'hispanic':
+        hispanic += 1 
+    else:
+        undetermined += 1
+    race_tab = [election, precinct_name, black, white, asian, hispanic, undetermined]
+    race_list.append(race_tab)
+    
+race_df = pd.DataFrame(race_list)
+race_df.columns = ["Election","Precinct","num_black","num_white","num_asian","num_hispanic","num_undetermined"]
+mn = pd.merge(mn, race_df,  how='left', left_on=['Election','Precinct'], right_on = ['Election','Precinct'])
+
+mn.to_csv('/Users/ruthbuck/Dropbox/Chicago RCV project/outcomes/mn_race_tab.csv')
+    
