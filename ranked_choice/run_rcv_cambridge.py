@@ -8,7 +8,7 @@ import numpy
 
 def generate_results(groups):
     for precinct, group in groups.items():
-        if len(set(group.values.ravel())) <= 5:
+        if len(set(group.values.ravel())) <= 3:
             continue
         winners = run_stv(group)
         yield [precinct] + list(winners)
@@ -16,7 +16,7 @@ def generate_results(groups):
 
 def run_stv(dataframe):
     schedule = PreferenceSchedule.from_dataframe(dataframe)
-    stv = FractionalSTV(schedule, seats=5)
+    stv = FractionalSTV(schedule, seats=3)
     return stv.elect()
 
 
@@ -33,7 +33,7 @@ def run_for_file(filename, output_file):
     }
     results = pandas.DataFrame(
         tqdm(generate_results(groups), total=len(groups), desc="Precincts"),
-        columns=["Precinct"] + [f"Winner_{i}" for i in [1, 2, 3, 4, 5]],
+        columns=["Precinct"] + [f"Winner_{i}" for i in [1, 2, 3]],
     )
     results.set_index("Precinct").to_csv(output_file)
     return results
