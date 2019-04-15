@@ -8,9 +8,6 @@
     [gerrychain](https://github.com/mggg/gerrychain). See also
     [hangulu/mggg_chicago](https://github.com/hangulu/mggg_chicago) for Jupyter
     notebooks that the notebooks included here are based on.
-  - `districtr_plans.zip`: Complete ensembles (50x1, 10x5, and 10x5 CA) in a
-    format that can be imported into
-    [Districtr](https://mggg.org/Districtr/new).
 
 - `projection/`: Code and results of our demographic threshold model
   projections, as described in section 5 of the report.
